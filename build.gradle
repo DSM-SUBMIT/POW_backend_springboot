@@ -1,0 +1,61 @@
+// eclipse와 다르게 IntelliJ IDEA는 추가 플러그인 없이 그래들 빌드 파일을 읽을 수 있다.
+plugins {
+	id 'org.springframework.boot' version '2.4.4'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'com.submit-project'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	// spring boot starter web - starter(의존성과 설정을 자동화해주는 모듈)를 주입 받음
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	//lombok - 어노테이션 기반으로 코드 자동완성 해주는 라이브러리
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	// spring security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
+	// Database
+	compile("org.springframework.boot:spring-boot-starter-data-jpa")
+	runtimeOnly 'mysql:mysql-connector-java'
+
+	// redis
+	compile('org.springframework.boot:spring-boot-starter-data-redis')
+	compile group: 'it.ozimov', name: 'embedded-redis', version: '0.7.2'
+
+	//jjwt - jwt 토큰 생성 및 jwt 토큰 파싱, 검증을 해주는 라이브러리
+	compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.2'
+
+	// jackson - java object를 json으로 변환하거나 json을 java object로 변환하는데 사용할 수 있는 java 라이브러리
+	compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.2'
+
+	// validation (For using @Valid Annotation)
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	// test
+	testImplementation 'com.h2database:h2'
+	implementation 'junit:junit:4.12'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+	testImplementation 'org.springframework.security:spring-security-test'
+}
+
+test {
+	useJUnitPlatform()
+}

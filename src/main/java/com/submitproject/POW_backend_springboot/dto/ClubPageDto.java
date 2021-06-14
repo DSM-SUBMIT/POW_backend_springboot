@@ -1,5 +1,6 @@
 package com.submitproject.POW_backend_springboot.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,8 +18,10 @@ public class ClubPageDto {
     public static class ClubPageResponse {
         private String name;
 
+        @JsonProperty("profile_path")
         private String profilePath;
 
+        @JsonProperty("banner_path")
         private String bannerPath;
 
         private String contents;
@@ -33,6 +36,7 @@ public class ClubPageDto {
 
         private String title;
 
+        @JsonProperty("created_at")
         private LocalDateTime createdAt;
     }
 

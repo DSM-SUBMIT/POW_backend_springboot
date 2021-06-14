@@ -1,5 +1,7 @@
 package com.submitproject.POW_backend_springboot.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,6 +26,7 @@ public class ClubDto {
 
         private String name;
 
+        @JsonProperty("profile_path")
         private String profilePath;
 
         private List<String> tags;

@@ -1,5 +1,7 @@
 package com.submitproject.POW_backend_springboot.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,9 +29,11 @@ public class AccountDto {
     public static class PasswordRequest {
 
         @NotNull
+        @JsonProperty("existing_password")
         private String existingPassword;
 
         @NotNull
+        @JsonProperty("new_password")
         private String newPassword;
     }
 

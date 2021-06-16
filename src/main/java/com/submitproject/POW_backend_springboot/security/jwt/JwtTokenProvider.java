@@ -35,6 +35,7 @@ public class JwtTokenProvider {
 
     public String generateAccessToken(Integer id) {
         return Jwts.builder()
+                .setHeaderParam("typ", "JWT")
                 .setIssuedAt(new Date()) //생성일(현재 날짜 및 시간)
                 .setSubject(id.toString()) //암호화할 문자열. 보통 pk값으로 설정
                 .setExpiration(new Date(System.currentTimeMillis() + accessTokenExpiration * 1000)) //시간을 밀리세컨드 단위로 알려줌(1초 = 1000밀리세컨드) / 단위 맞춰주기 위해서 *1000

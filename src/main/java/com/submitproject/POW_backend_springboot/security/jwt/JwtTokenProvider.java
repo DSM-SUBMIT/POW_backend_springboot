@@ -11,7 +11,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.Date;
 
 @RequiredArgsConstructor
@@ -31,6 +34,11 @@ public class JwtTokenProvider {
     private String prefix; // 이 안에 'bearer'이라는 문자열이 있음
 
     private final AuthDetailsService authDetailsService;
+
+    @PostConstruct // 객체 생성될 때 호출됨
+    private void init() {
+        secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
+    }
 
     public String generateAccessToken(Integer id) {
         return Jwts.builder()

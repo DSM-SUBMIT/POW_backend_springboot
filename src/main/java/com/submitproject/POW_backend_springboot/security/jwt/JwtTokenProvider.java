@@ -64,7 +64,7 @@ public class JwtTokenProvider {
     public String getId(String token) {
         try {
             return Jwts.parser().
-                    setSigningKey(secretKey)
+                    setSigningKey(encoding())
                     .parseClaimsJws(token)
                     .getBody()
                     .getSubject();

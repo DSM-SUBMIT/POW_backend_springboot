@@ -23,8 +23,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
@@ -102,7 +101,7 @@ public class AccountControllerTest {
     @WithMockUser(username = "SUB112", password = "hi")
     public void updatePassword() throws Exception {
         AccountDto.PasswordRequest request = new AccountDto.PasswordRequest("hi","hello");
-        mvc.perform(put("/account")
+        mvc.perform(patch("/account")
                 .content(new ObjectMapper().writeValueAsString(request))
                 .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isNoContent());
@@ -112,7 +111,7 @@ public class AccountControllerTest {
     @WithMockUser(username = "SUB112", password = "hi")
     public void updatePassword_x() throws Exception {
         AccountDto.PasswordRequest request = new AccountDto.PasswordRequest("hello","hello");
-        mvc.perform(put("/account")
+        mvc.perform(patch("/account")
                 .content(new ObjectMapper().writeValueAsString(request))
                 .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isBadRequest());
